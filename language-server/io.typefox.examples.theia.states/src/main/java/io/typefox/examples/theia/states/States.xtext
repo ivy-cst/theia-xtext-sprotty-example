@@ -2,15 +2,27 @@ grammar io.typefox.examples.theia.states.States with org.eclipse.xtext.common.Te
 
 generate states "http://www.typefox.io/examples/theia/states/States"
 
-StateMachine:
-	'statemachine' name=ID
-	(states+=State | events+=Event)*;
-	
+ProcessDefinition:
+	'process' name=ID
+	(elements+=ProcessElement | edges+=Edge)*;
+ProcessElement:
+	(Start | Activity | End);
+Start:
+	'start' name=ID;
+Activity:
+	'activity' name=ID;
+End:
+	'end' name=ID;
+Edge:
+	'edge'
+	from=[ProcessElement] '=>' to=[ProcessElement];
+/*
 State:
-	'state' name=ID transitions+=Transition*;
-	
-Event: 
+	'state' name=ID;
+
+Event:
 	'event' name=ID;
-	
+
 Transition:
 	event=[Event] '=>' state=[State];
+*/

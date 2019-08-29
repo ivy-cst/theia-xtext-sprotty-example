@@ -4,7 +4,7 @@
 package io.typefox.examples.theia.states.tests
 
 import com.google.inject.Inject
-import io.typefox.examples.theia.states.states.StateMachine
+import io.typefox.examples.theia.states.states.ProcessDefinition
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -16,33 +16,19 @@ import org.junit.jupiter.api.^extension.ExtendWith
 @InjectWith(StatesInjectorProvider)
 class StatesParsingTest {
 	@Inject
-	ParseHelper<StateMachine> parseHelper
-	
+	ParseHelper<ProcessDefinition> parseHelper
+
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			statemachine MrsGrantsSecretCompartments
-			
-			event doorClosed
-			event drawOpened
-			event lightOn
-			event panelClosed
-			
-			state active
-				lightOn	=> waitingForDraw
-				drawOpened => waitingForLight
-			
-			state idle
-				doorClosed => active
-			
-			state waitingForLight 
-				lightOn => idle
-			
-			state waitingForDraw
-				drawOpened => unlockedPanel
-			
-			state unlockedPanel
-				panelClosed => idle
+			process p1
+
+			start start1
+			activity activity1
+			end end1
+
+			edge start1 => activity1
+			edge activity1 => end1
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
