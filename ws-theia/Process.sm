@@ -1,0 +1,11 @@
+process p1
+
+start start1
+edge start1 => activity1
+activity activity1
+edge activity1 => activity2
+activity activity2
+edge activity2 => activity3
+activity activity3
+edge activity3 => end1 
+end end1
