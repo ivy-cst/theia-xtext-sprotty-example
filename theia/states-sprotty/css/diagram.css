@@ -1,5 +1,7 @@
 .sprotty-node {
-    fill: lightblue
+    stroke-width: 2;
+    fill: lightblue;
+    stroke: black;
 }
 
 .sprotty-node.selected {
