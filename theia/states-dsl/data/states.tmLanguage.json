@@ -10,7 +10,7 @@
         },
         {
             "name": "keyword.control.states",
-            "match": "\\b(statemachine|state|event|=>)\\b"
+            "match": "\\b(process|start|activity|end|edge|=>)\\b"
         },
         {
             "name": "keyword.operator.states",
