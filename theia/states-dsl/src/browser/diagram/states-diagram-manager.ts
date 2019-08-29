@@ -29,6 +29,6 @@ export class StatesDiagramManager extends DiagramManager {
     }
 
     get label() {
-        return 'State machine diagram';
+        return 'Process diagram';
     }
 }
