@@ -69,7 +69,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
 					type = 'label:xref'
-					text = 'label'
+					text = ''
 				]).trace(transition, StatesPackage.Literals.EDGE__FROM, -1)
 			]
 		]).traceAndMark(transition, context)
