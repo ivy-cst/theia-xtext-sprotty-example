@@ -2,7 +2,7 @@
 import { svg } from 'snabbdom-jsx';
 
 import { VNode } from "snabbdom/vnode";
-import { Point, PolylineEdgeView, RenderingContext, SEdge, toDegrees, IView, SPort } from "sprotty";
+import { Point, PolylineEdgeView, RenderingContext, SEdge, toDegrees, IView, SPort, SShapeElement, Hoverable, Selectable, RectangularNodeView, SNode} from "sprotty";
 import { injectable } from 'inversify';
 
 @injectable()
@@ -29,3 +29,18 @@ export class TriangleButtonView implements IView {
     }
 }
 
+
+@injectable()
+export class MyCircularNodeView implements IView {
+    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext): VNode {
+        console.log(node)
+        if (node.id.startsWith('activity'))
+            return new RectangularNodeView().render(node, context);
+        return <g>
+            <circle class-sprotty-node={node instanceof SNode} class-sprotty-port={node instanceof SPort}
+                class-mouseover={node.hoverFeedback} class-selected={node.selected}
+                r={25} cx={35} cy={25}></circle>
+            {context.renderChildren(node)}
+        </g>;
+    }
+}

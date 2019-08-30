@@ -1,8 +1,9 @@
 import { injectable } from "inversify";
 import { Action, CreateElementAction, CreatingOnDrag, creatingOnDragFeature, EditableLabel, 
-    editLabelFeature, hoverFeedbackFeature, ManhattanEdgeRouter, popupFeature, RectangularNode, 
+    editLabelFeature, hoverFeedbackFeature, ManhattanEdgeRouter, popupFeature, 
     RectangularPort, SChildElement, SEdge, SGraph, SGraphFactory, SLabel, SModelElementSchema, 
-    SParentElement, SRoutableElement, EdgePlacement } from "sprotty";
+    SParentElement, SRoutableElement, EdgePlacement, SNode } from "sprotty";
+import { RECTANGULAR_ANCHOR_KIND, ELLIPTIC_ANCHOR_KIND } from "sprotty";
 
 @injectable()
 export class StatesModelFactory extends SGraphFactory {
@@ -28,9 +29,15 @@ export class StatesDiagram extends SGraph {
     }
 }
 
-export class StatesNode extends RectangularNode {
+export class StatesNode extends SNode {
     canConnect(routable: SRoutableElement, role: string) {
         return true;
+    }
+
+    get anchorKind() {
+        if(this.id.startsWith('activity'))
+            return RECTANGULAR_ANCHOR_KIND
+        return ELLIPTIC_ANCHOR_KIND
     }
 }
 

@@ -3,12 +3,12 @@ import 'sprotty-theia/css/theia-sprotty.css';
 import 'sprotty/css/sprotty.css';
 import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defaultModule, expandModule, 
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
-    openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
+    openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, SEdge, 
     selectModule, SGraphView, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
     SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand, labelEditModule, 
     configureCommand, updateModule, routingModule, ManhattanEdgeRouter, edgeLayoutModule } from 'sprotty';
 import "../css/diagram.css";
-import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
+import { PolylineArrowEdgeView, TriangleButtonView, MyCircularNodeView } from "./views";
 import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort, StatesLabel } from "./model";
 import { CustomRouter } from "./custom-edge-router";
 
@@ -21,7 +21,7 @@ const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) 
 
     const context = { bind, unbind, isBound, rebind };
     configureModelElement(context, 'graph', StatesDiagram, SGraphView);
-    configureModelElement(context, 'node', StatesNode, RectangularNodeView);
+    configureModelElement(context, 'node', StatesNode, MyCircularNodeView);
     configureModelElement(context, 'label', StatesLabel, SLabelView);
     configureModelElement(context, 'label:xref', StatesLabel, SLabelView);
     configureModelElement(context, 'edge', SEdge, PolylineArrowEdgeView);
